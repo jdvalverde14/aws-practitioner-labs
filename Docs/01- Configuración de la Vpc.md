@@ -21,7 +21,7 @@ Crear la red base del lab en AWS mediante una VPC personalizada con subredes pú
 - NAT Gateway
 
 ## Arquitectura
-![VPC Base](Diagrams/01-vpc-training.drawio.png)
+![VPC Base](../Diagrams/01-vpc-training.drawio.png)
 
 ## Configuración realizada
 
@@ -30,26 +30,26 @@ Se creó la VPC `training-lab` con el bloque CIDR `10.0.0.0/16` y tenancy `defau
 
 ![VPC creada](../Screenshots/01-vpc.png)
 
-### 2. Creación de subredes 
+### 2. Creación de subredes
 Se crearon cuatro subredes distribuidas en dos zonas de disponibilidad: `us-east-1a` y `us-east-1b`. La separación entre subredes públicas y privadas permite organizar mejor la conectividad y la seguridad de la arquitectura.
 
-![Subredes](Screenshots/01-subnets.png)
+![Subredes](../Screenshots/01-subnets.png)
 
 ### 3. Asociación del Internet Gateway
 Se creó el Internet Gateway `1-traininglab-igw` y luego se adjuntó a la VPC `training-lab`. Este componente permite la comunicación entre las subredes públicas e Internet.
 
-![IGW](Screenshots/01-traininglab-igw.png)
+![IGW](../Screenshots/01-traininglab-igw.png)
 
 ### 4. Configuración de tablas de enrutamiento
 Se creó una route table pública y una privada. La tabla pública se asoció a las subredes públicas y se configuró con la ruta `0.0.0.0/0` hacia el Internet Gateway; la tabla privada se asoció a las subredes privadas para gestionar la salida a Internet a través del NAT Gateway.
 
-![Route tables](Screenshots/01-rtpublicas.png)
+![Route tables](../Screenshots/01-rtpublicas.png)
 
 ### 5. Creación del NAT Gateway
 Se aprovisionó un NAT Gateway en la subred pública 1 y se le asignó una Elastic IP. Esto permite que las subredes privadas tengan salida a Internet sin exponer directamente sus recursos.
 
-![NAT Gateway](Screenshots/01-rtprivadas.png)
-![](Screenshots/01-natgateway.png)
+![NAT Gateway](../Screenshots/01-rtprivadas.png)
+![Natgtw 2](../Screenshots/01-natgateway.png)
 ## Datos técnicos relevantes
 
 | Recurso          | Nombre              |      CIDR       |     Zona     |
