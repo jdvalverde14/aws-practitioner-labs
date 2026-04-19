@@ -3,10 +3,10 @@ tags:
   - aws
   - practitioner
   - lab
-date: 2026-04-17
+date: 2026-04-18
 ---
 
-# 01 - Nombre del laboratorio
+# 02 - Nombre del laboratorio
 
 ## Objetivo
 Describe aquí el propósito del laboratorio de forma breve y clara.
