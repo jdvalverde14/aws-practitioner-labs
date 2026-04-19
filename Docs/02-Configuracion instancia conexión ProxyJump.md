@@ -54,7 +54,7 @@ Este diseño mantiene el **principio de mínimo acceso**: el servidor público f
 
 Inicialmente, el laboratorio se había planteado con una conexión directa mediante un comando SSH con salto manual a través del `Jumphost`. Sin embargo, durante la implementación fue necesario ajustar el procedimiento, ya que cada servidor privado utilizaba su propia llave y la conexión requería definir explícitamente qué identidad debía usar el cliente SSH en cada caso, por tanto el comando de conexión directa fallaba.
 
-![](../Screenshots/02-proxyjump-fail.png)
+![Proxxyjump Manual Failed](../Screenshots/02-proxyjump-fail.png)
 
 Por esta razón, en lugar de depender de un comando manual para cada acceso, la solución final consistió en crear un archivo `~/.ssh/config` en la máquina local. Esto permitió declarar de forma ordenada el host bastion, los hosts privados, el usuario de conexión, la llave correspondiente a cada instancia y la relación de salto entre ellos.
 
@@ -70,7 +70,7 @@ chmod 400 ~/.ssh/1-serverB.pem
 
 #### 3.2 Definición del archivo `~/.ssh/config`
 
-Con la ayuda del comando `nano` se crea el archivo de configuración SSH para declarar el `Jumphost` y los servidores privados como alias reutilizables, se define lo siguiente.
+Con la ayuda del comando `nano` se crea el archivo `config` de configuración SSH para declarar el `Jumphost` y los servidores privados como alias reutilizables, se define lo siguiente.
 
 ```ssh
 Host bastion
@@ -102,6 +102,7 @@ ssh serverA
 ssh serverB
 ```
 
+
 Este enfoque mantiene la lógica del `Jumphost`, pero mejora la operación al evitar comandos extensos y reducir errores relacionados con rutas, usuarios o llaves privadas.
 
 ### 4. Instalación y validación del servicio web
@@ -111,6 +112,8 @@ Una vez establecida la conexión con cada instancia privada, se instala Apache c
 ```bash
 sudo yum install httpd -y
 ```
+
+![SSH serverA](../Screenshots/02-ssh-serverA.png)
 
 Luego se crea o edita el archivo principal del sitio:
 
@@ -122,8 +125,10 @@ Después, se habilita e inicia el servicio:
 
 ```bash
 sudo systemctl enable httpd
-sudo systemctl start httpd
+sudo systemctl restart httpd
 ```
+
+![SSH serverA](../Screenshots/02-ssh-serverA-2.png)
 
 Este mismo procedimiento se repite en `ServerA` y `ServerB`, con el fin de validar que ambas instancias pueden ser administradas correctamente a través del `Jumphost`.
 
