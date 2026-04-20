@@ -19,7 +19,7 @@ Implementar un esquema de acceso seguro hacia instancias privadas dentro de una 
 - `sgprivadas`
 
 ## Arquitectura
-![Arquitectura](../Diagrams/02-nombre-del-diagrama.png)
+![Arquitectura](../Diagrams/02-instances-training-lab.drawio.png)
 
 Conceptos clave:
 - **Jumphost**: instancia ubicada en una subred pública que actúa como punto de entrada controlado hacia recursos alojados en subredes privadas.
