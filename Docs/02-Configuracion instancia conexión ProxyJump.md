@@ -102,7 +102,6 @@ ssh serverA
 ssh serverB
 ```
 
-
 Este enfoque mantiene la lógica del `Jumphost`, pero mejora la operación al evitar comandos extensos y reducir errores relacionados con rutas, usuarios o llaves privadas.
 
 ### 4. Instalación y validación del servicio web
@@ -134,12 +133,25 @@ Este mismo procedimiento se repite en `ServerA` y `ServerB`, con el fin de valid
 
 ### 5. Validación final
 
-Como validación técnica, se comprueba que:
-- la conexión SSH hacia `ServerA` y `ServerB` se realiza desde la máquina local usando el archivo `~/.ssh/config`,
-- el salto se ejecuta a través del `Jumphost`,
-- y el servicio Apache queda instalado y operativo en ambas instancias privadas.
+Como validación técnica, se comprobó que la conexión SSH hacia `ServerA` y `ServerB` se realizaba correctamente desde la máquina local utilizando el archivo `~/.ssh/config`, ejecutando el salto a través del `Jumphost` mediante `ProxyJump`.
 
-![Captura 3](../Screenshots/01-captura-3.png)
+Adicionalmente, se verificó el funcionamiento del servicio Apache en ambas instancias privadas mediante `curl`, consultando el servidor web local de cada host:
+
+```bash
+ssh serverA "curl -I http://localhost"
+ssh serverB "curl -I http://localhost"
+```
+
+La respuesta `HTTP/1.1 200 OK` confirmó que Apache quedó instalado, iniciado y sirviendo contenido correctamente en ambos servidores.
+
+Para validar el contenido desplegado en cada instancia, también se realizó una consulta directa al `index.html` publicado:
+
+```bash
+ssh serverA "curl -s http://localhost | head -n 20"
+ssh serverB "curl -s http://localhost | head -n 20"
+```
+
+![Captura 3](../Screenshots/02-ssh-validation.png)
 
 ## Datos técnicos relevantes
 
