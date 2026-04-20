@@ -1,8 +1,11 @@
 ---
 tags:
   - aws
-  - practitioner
   - lab
+  - instances
+  - Proxxyjump
+  - ssh
+  - security-groups
 date: 2026-04-18
 ---
 

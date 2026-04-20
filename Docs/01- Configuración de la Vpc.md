@@ -3,6 +3,8 @@ tags:
   - aws
   - vpc
   - practitioner
+  - subnets
+  - Internet-gateway
 date: 2026-04-17
 ---
 # 01 - Configuración de la VPC
